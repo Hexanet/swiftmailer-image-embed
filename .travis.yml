@@ -20,4 +20,4 @@ install:
   - composer install
 
 script:
-  - ./vendor/composer/phpunit
+  - ./vendor/bin/phpunit
