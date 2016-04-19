@@ -1,6 +1,6 @@
 # Swiftmailer Image Embed Plugin
 
-[![Build Status](https://travis-ci.org/Hexanet/swiftmailer-image-embed.svg)](https://travis-ci.org/Hexanet/swiftmailer-image-embed) [![Total Downloads](https://poser.pugx.org/hexanet/swiftmailer-image-embed/downloads.png)](https://packagist.org/packages/hexanet/swiftmailer-image-embed) [![Latest Unstable Version](https://poser.pugx.org/hexanet/swiftmailer-image-embed/v/unstable.png)](https://packagist.org/packages/hexanet/swiftmailer-image-embed)
+[![Build Status](https://travis-ci.org/Hexanet/swiftmailer-image-embed.svg)](https://travis-ci.org/Hexanet/swiftmailer-image-embed) [![Total Downloads](https://poser.pugx.org/hexanet/swiftmailer-image-embed/downloads.png)](https://packagist.org/packages/hexanet/swiftmailer-image-embed) [![Latest Stable Version](https://poser.pugx.org/hexanet/swiftmailer-image-embed/v/stable.png)](https://packagist.org/packages/hexanet/swiftmailer-image-embed)
 
 Swiftmailer plugin to automatically embed images into message.
 
