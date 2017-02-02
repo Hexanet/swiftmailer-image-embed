@@ -4,6 +4,7 @@ namespace Hexanet\Swiftmailer\Test;
 
 use Hexanet\Swiftmailer\ImageEmbedPlugin;
 use PHPUnit_Framework_TestCase;
+use Swift_Attachment;
 use Swift_Mailer;
 use Swift_Message;
 
@@ -29,10 +30,11 @@ class EmbedImagePluginTest extends PHPUnit_Framework_TestCase
     <head></head>
     <body>
         <p>some text</p>
-        <img src="fixtures/placeholder.png" alt="placeholder">
+        <img src="%s" alt="placeholder">
     </body>
 </html>
 HTML;
+        $html = sprintf($html, __DIR__ . '/fixtures/placeholder.png');
 
         $message->setBody($html, 'text/html');
 
@@ -57,10 +59,11 @@ HTML;
     <head></head>
     <body>
         <p>some text</p>
-        <img src="fixtures/placeholder.png" alt="placeholder">
+        <img src="%s" alt="placeholder">
     </body>
 </html>
 HTML;
+        $html = sprintf($html, __DIR__ . '/fixtures/placeholder.png');
 
         $message->addPart($html, 'text/html');
 
@@ -72,6 +75,37 @@ HTML;
         $this->assertContains(
             sprintf('<img src="cid:%s" alt="placeholder">', $children[1]->getId()),
             $children[0]->getBody(),
+            'Image is linked in body'
+        );
+    }
+
+    public function testAttachment()
+    {
+        $message = $this->createMessage();
+        $message->attach(Swift_Attachment::fromPath(__DIR__ . '/fixtures/placeholder.png'));
+
+        $html = <<<HTML
+<html>
+    <head></head>
+    <body>
+        <p>some text</p>
+        <img src="%s" alt="placeholder">
+    </body>
+</html>
+HTML;
+        $html = sprintf($html, __DIR__ . '/fixtures/placeholder.png');
+
+        $message->setBody($html, 'text/html');
+
+        $this->mailer->send($message);
+
+        $children = $message->getChildren();
+
+        $this->assertInstanceOf('\Swift_Attachment', $children[0], 'Image is embedded in the message');
+        $this->assertInstanceOf('\Swift_Image', $children[1], 'Image is embedded in the message');
+        $this->assertContains(
+            sprintf('<img src="cid:%s" alt="placeholder">', $children[1]->getId()),
+            $message->getBody(),
             'Image is linked in body'
         );
     }
