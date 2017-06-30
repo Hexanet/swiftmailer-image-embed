@@ -5,8 +5,8 @@ namespace Hexanet\Swiftmailer;
 use Swift_Events_SendEvent;
 use Swift_Events_SendListener;
 use Swift_Image;
-use Swift_Mime_Message;
-use Swift_Mime_MimeEntity;
+use Swift_Mime_SimpleMimeEntity;
+use Swift_Mime_SimpleMessage;
 
 class ImageEmbedPlugin implements Swift_Events_SendListener
 {
@@ -38,12 +38,12 @@ class ImageEmbedPlugin implements Swift_Events_SendListener
     }
 
     /**
-     * @param Swift_Mime_Message $message
-     * @param Swift_Mime_MimeEntity $part
+     * @param Swift_Mime_SimpleMessage $message
+     * @param Swift_Mime_SimpleMimeEntity $part
      *
      * @return string
      */
-    protected function embedImages(Swift_Mime_Message $message, Swift_Mime_MimeEntity $part = null)
+    protected function embedImages(Swift_Mime_SimpleMessage $message, Swift_Mime_SimpleMimeEntity $part = null)
     {
         $body = $part === null ? $message->getBody() : $part->getBody();
 
@@ -60,7 +60,7 @@ class ImageEmbedPlugin implements Swift_Events_SendListener
              */
             if (strpos($src, 'cid:') === false) {
 
-                $entity = \Swift_Image::fromPath($src);
+                $entity = Swift_Image::fromPath($src);
                 $message->setChildren(
                     array_merge($message->getChildren(), [$entity])
                 );

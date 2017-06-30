@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Swift_Attachment;
 use Swift_Mailer;
 use Swift_Message;
+use Swift_NullTransport;
 
 class EmbedImagePluginTest extends TestCase
 {
@@ -17,7 +18,7 @@ class EmbedImagePluginTest extends TestCase
 
     public function setUp()
     {
-        $this->mailer = Swift_Mailer::newInstance(\Swift_NullTransport::newInstance());
+        $this->mailer = new Swift_Mailer(new Swift_NullTransport());
         $this->mailer->registerPlugin(new ImageEmbedPlugin());
     }
 
@@ -115,8 +116,7 @@ HTML;
      */
     private function createMessage()
     {
-        $message = Swift_Message::newInstance();
-
+        $message = new Swift_Message();
         $message->setSubject('Test message');
         $message->setFrom('from@example.com');
         $message->setTo('to@example.com');
