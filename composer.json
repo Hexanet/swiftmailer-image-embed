@@ -9,11 +9,11 @@
     { "name": "Nicolas Hart", "email": "n.hart@hexanet.fr" }
   ],
   "require": {
-    "php": ">=5.4",
-    "swiftmailer/swiftmailer": "^5.4"
+    "php": ">=7.0.0",
+    "swiftmailer/swiftmailer": "^6.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^4.0"
+    "phpunit/phpunit": "^6.0"
   },
   "suggests": {
     "openbuildings/swiftmailer-css-inliner": "Inline css in your Swiftmailer messages"
