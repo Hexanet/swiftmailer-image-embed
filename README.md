@@ -15,7 +15,7 @@ composer require hexanet/swiftmailer-image-embed
 ```php
 use Hexanet\Swiftmailer\ImageEmbedPlugin;
 
-$mailer = Swift_Mailer::newInstance();
+$mailer = new Swift_Mailer($yourTransport);
 
 $mailer->registerPlugin(new ImageEmbedPlugin());
 ```
