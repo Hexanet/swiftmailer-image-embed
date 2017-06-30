@@ -9,7 +9,7 @@
     { "name": "Nicolas Hart", "email": "n.hart@hexanet.fr" }
   ],
   "require": {
-    "php": ">=5.4",
+    "php": ">=7.0.0",
     "swiftmailer/swiftmailer": "^5.4"
   },
   "require-dev": {
