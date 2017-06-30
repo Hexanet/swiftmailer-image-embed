@@ -3,12 +3,12 @@
 namespace Hexanet\Swiftmailer\Test;
 
 use Hexanet\Swiftmailer\ImageEmbedPlugin;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Swift_Attachment;
 use Swift_Mailer;
 use Swift_Message;
 
-class EmbedImagePluginTest extends PHPUnit_Framework_TestCase
+class EmbedImagePluginTest extends TestCase
 {
     /**
      * @var Swift_Mailer
