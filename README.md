@@ -22,7 +22,7 @@ $mailer->registerPlugin(new ImageEmbedPlugin());
 
 ## Credits
 
-Developed by the SI Team of [Hexanet](http://www.hexanet.fr/).
+Developed by the [Dev Team](http://teamdev.hexanet.fr) of [Hexanet](http://www.hexanet.fr/).
 
 ## License
 
