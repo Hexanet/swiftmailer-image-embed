@@ -38,8 +38,8 @@ class ImageEmbedPlugin implements Swift_Events_SendListener
     }
 
     /**
-     * @param Swift_Mime_SimpleMessage $message
-     * @param Swift_Mime_SimpleMimeEntity $part
+     * @param Swift_Mime_SimpleMessage         $message
+     * @param Swift_Mime_SimpleMimeEntity|null $part
      *
      * @return string
      */
