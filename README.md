@@ -20,6 +20,17 @@ $mailer = new Swift_Mailer($yourTransport);
 $mailer->registerPlugin(new ImageEmbedPlugin());
 ```
 
+or for symfony in your services.yml:
+```yml
+    hexanet.swiftmailer.image_embed_plugin:
+        class: Hexanet\Swiftmailer\ImageEmbedPlugin
+        tags:
+            - { name: swiftmailer.default.plugin }
+        arguments: ['%kernel.root_dir%/../web/']
+```
+
+The arguments are optional.
+
 ## Credits
 
 Developed by the [Dev Team](http://teamdev.hexanet.fr) of [Hexanet](http://www.hexanet.fr/).

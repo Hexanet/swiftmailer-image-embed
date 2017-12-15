@@ -11,6 +11,18 @@ use Swift_Mime_SimpleMessage;
 class ImageEmbedPlugin implements Swift_Events_SendListener
 {
 
+    private $basePath = '';
+
+    /**
+     * ImageEmbedPlugin constructor.
+     *
+     * @param string $basePath
+     */
+    public function __construct($basePath = '')
+    {
+        $this->basePath = $basePath;
+    }
+
     /**
      * @param Swift_Events_SendEvent $event
      */
@@ -60,7 +72,7 @@ class ImageEmbedPlugin implements Swift_Events_SendListener
              */
             if (strpos($src, 'cid:') === false) {
 
-                $entity = Swift_Image::fromPath($src);
+                $entity = \Swift_Image::fromPath($this->basePath . $src);
                 $message->setChildren(
                     array_merge($message->getChildren(), [$entity])
                 );
