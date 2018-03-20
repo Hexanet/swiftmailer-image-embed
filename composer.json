@@ -6,7 +6,7 @@
   "homepage": "https://github.com/Hexanet/swiftmailer-image-embed",
   "license": "MIT",
   "authors": [
-    { "name": "Nicolas Hart", "email": "n.hart@hexanet.fr" }
+    { "name": "Nicolas Hart", "email": "nhart@hexanet.fr" }
   ],
   "require": {
     "php": ">=7.0.0",
