@@ -72,7 +72,13 @@ class ImageEmbedPlugin implements Swift_Events_SendListener
              */
             if (strpos($src, 'cid:') === false) {
 
-                $entity = \Swift_Image::fromPath($this->basePath . $src);
+                $path = $src;
+
+                if (filter_var($src, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED) === false) {
+                    $path = $this->basePath . $src;
+                }
+
+                $entity = \Swift_Image::fromPath($path);
                 $message->setChildren(
                     array_merge($message->getChildren(), [$entity])
                 );
