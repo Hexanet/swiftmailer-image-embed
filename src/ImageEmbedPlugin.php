@@ -71,22 +71,57 @@ class ImageEmbedPlugin implements Swift_Events_SendListener
              * see https://github.com/swiftmailer/swiftmailer/issues/139
              */
             if (strpos($src, 'cid:') === false) {
+                $path = $this->getPathFromSrc($src);
 
-                $path = $src;
+                if ($this->fileExists($path)) {
+                    $entity = \Swift_Image::fromPath($path);
+                    $message->setChildren(
+                        array_merge($message->getChildren(), [$entity])
+                    );
 
-                if (filter_var($src, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED) === false) {
-                    $path = $this->basePath . $src;
+                    $image->setAttribute('src', 'cid:' . $entity->getId());
                 }
-
-                $entity = \Swift_Image::fromPath($path);
-                $message->setChildren(
-                    array_merge($message->getChildren(), [$entity])
-                );
-
-                $image->setAttribute('src', 'cid:' . $entity->getId());
             }
         }
 
         return $dom->saveHTML();
+    }
+
+    /**
+     * @param $path
+     *
+     * @return bool
+     */
+    protected function isUrl($path)
+    {
+        return filter_var($path, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED) !== false;
+    }
+
+    /**
+     * @param $src
+     *
+     * @return string
+     */
+    protected function getPathFromSrc($src)
+    {
+        if ($this->isUrl($src)) {
+            return $src;
+        }
+
+        return $this->basePath . $src;
+    }
+
+    /**
+     * @param $path
+     *
+     * @return bool
+     */
+    protected function fileExists($path)
+    {
+        if ($this->isUrl($path)) {
+            return !!@getimagesize($path);
+        }
+
+        return file_exists($path);
     }
 }
