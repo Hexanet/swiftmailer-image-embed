@@ -10,15 +10,12 @@ use Swift_Mime_SimpleMessage;
 
 class ImageEmbedPlugin implements Swift_Events_SendListener
 {
-
-    private $basePath = '';
-
     /**
-     * ImageEmbedPlugin constructor.
-     *
-     * @param string $basePath
+     * @var string
      */
-    public function __construct($basePath = '')
+    private $basePath;
+
+    public function __construct(string $basePath = '')
     {
         $this->basePath = $basePath;
     }
@@ -87,22 +84,12 @@ class ImageEmbedPlugin implements Swift_Events_SendListener
         return $dom->saveHTML();
     }
 
-    /**
-     * @param $path
-     *
-     * @return bool
-     */
-    protected function isUrl($path)
+    protected function isUrl(string $path) : bool
     {
-        return filter_var($path, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED) !== false;
+        return filter_var($path, FILTER_VALIDATE_URL) !== false;
     }
 
-    /**
-     * @param $src
-     *
-     * @return string
-     */
-    protected function getPathFromSrc($src)
+    protected function getPathFromSrc(string $src) : string
     {
         if ($this->isUrl($src)) {
             return $src;
@@ -111,12 +98,7 @@ class ImageEmbedPlugin implements Swift_Events_SendListener
         return $this->basePath . $src;
     }
 
-    /**
-     * @param $path
-     *
-     * @return bool
-     */
-    protected function fileExists($path)
+    protected function fileExists(string $path) : bool
     {
         if ($this->isUrl($path)) {
             return !!@getimagesize($path);
